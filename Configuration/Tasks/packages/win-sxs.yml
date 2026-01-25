@@ -1,0 +1,44 @@
+---
+title: Packages
+description: Removes system (WinSxS) packages
+privilege: TrustedInstaller
+actions:
+
+  # NOTE: !systemPackage: method of removing system packages is now deprecated and not recommended by Shuragen4ik, as it is one of the main cause of #49
+
+  - !writeStatus: {status: "Removing system packages"}
+  # Custom removal skipped
+
+  - !writeStatus: {status: 'Disabling Windows Defender', option: 'disable-defender'}
+  - !powerShell:
+    command: 'Set-MpPreference -DisableRealtimeMonitoring $true -DisableBehaviorMonitoring $true -DisableOnAccessProtection $true -DisableScanOnRealtimeEnable $true'
+    wait: true
+    option: 'disable-defender'
+  - !powerShell:
+    command: 'Stop-Service -Name WinDefend -Force -ErrorAction SilentlyContinue; Stop-Service -Name SecurityCenter -Force -ErrorAction SilentlyContinue; Stop-Service -Name wscsvc -Force -ErrorAction SilentlyContinue'
+    wait: true
+    option: 'disable-defender'
+  - !cmd:
+    command: 'DISM /Online /Disable-Feature /FeatureName:Windows-Defender-Features /Remove /NoRestart'
+    wait: true
+    option: 'disable-defender'
+  - !cmd:
+    command: 'DISM /Online /Disable-Feature /FeatureName:Windows-Defender /Remove /NoRestart'
+    wait: true
+    option: 'disable-defender'
+  - !cmd:
+    command: 'DISM /Online /Disable-Feature /FeatureName:Windows-Defender-GUI /Remove /NoRestart'
+    wait: true
+    option: 'disable-defender'
+
+  - !writeStatus: {status: 'Enabling Windows Defender', option: 'enable-defender'}
+  - !powerShell:
+    command: 'Set-MpPreference -EnableControlledFolderAccess Enabled -EnableNetworkProtection Enabled -PUAProtection enable'
+    wait: true
+    option: 'enable-defender'
+
+  - !writeStatus: {status: "Removing AI components", option: 'remove-winsxs-ai'}
+  # Custom removal skipped
+
+  - !writeStatus: {status: "Removing OneDrive WinSxS", option: "remove-onedrive"}
+  # Custom removal skipped

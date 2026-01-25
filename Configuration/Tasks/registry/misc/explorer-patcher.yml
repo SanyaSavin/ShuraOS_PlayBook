@@ -1,0 +1,21 @@
+---
+title: Configure Explorer Patcher
+description: Configure Explorer Patcher settings for Windows 10 UI elements
+privilege: TrustedInstaller
+actions:
+
+  # === Explorer Patcher - Windows 10 taskbar
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'TaskbarStyle', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\ExplorerPatcher', value: 'TaskbarStyle', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+
+  # === Explorer Patcher - Windows 11 Start menu icon
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'StartButtonStyle', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\ExplorerPatcher', value: 'StartButtonStyle', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+
+  # === Explorer Patcher - Windows 10 File Explorer
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'FileExplorerCommandBarStyle', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\ExplorerPatcher', value: 'FileExplorerCommandBarStyle', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+
+  # === Explorer Patcher - Register as shell extension
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'RegisterAsShellExtension', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKU\.DEFAULT\Software\ExplorerPatcher', value: 'RegisterAsShellExtension', type: REG_DWORD, data: '1', option: "explorerpatcher"}

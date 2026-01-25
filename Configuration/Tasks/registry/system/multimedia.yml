@@ -1,0 +1,25 @@
+---
+title: configure-multimedia
+description: configure-multimedia
+privilege: TrustedInstaller
+actions:
+
+  # === NetworkThrottlingIndex - 10 (default)
+  # -----> https://github.com/djdallmann/GamingPCSetup/blob/master/CONTENT/RESEARCH/NETWORK/README.md#networkthrottlingindex
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile', value: 'NetworkThrottlingIndex', type: REG_DWORD, data: '10'}
+
+  # === Enable MPO (Multi-Plane Overlay) by default for GPU performance
+  # System-wide enable using OverlayTestMode (method from WpfApp3)
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\Dwm', value: 'OverlayTestMode', type: REG_DWORD, data: '0'}
+  # Additional system keys for compatibility
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\Dwm', value: 'EnableMultiPlaneOverlay', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\Dwm', value: 'EnableMultiPlaneOverlayForSystem', type: REG_DWORD, data: '1'}
+  # User preferences (legacy support)
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\DirectX\UserGpuPreferences', value: 'MpoEnabled', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\DirectX\UserGpuPreferences', value: 'MpoMaxPlanes', type: REG_DWORD, data: '4'}
+  - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Microsoft\DirectX\UserGpuPreferences', value: 'MpoEnabled', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Microsoft\DirectX\UserGpuPreferences', value: 'MpoMaxPlanes', type: REG_DWORD, data: '4'}
+
+  # === Enable Flip Model for games in windowed mode by default
+  - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\DirectX\UserGpuPreferences', value: 'DirectXUserGlobalSettings', type: REG_SZ, data: 'SwapEffectUpgradeEnable=1;'}
+  - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Microsoft\DirectX\UserGpuPreferences', value: 'DirectXUserGlobalSettings', type: REG_SZ, data: 'SwapEffectUpgradeEnable=1;'}

@@ -1,0 +1,127 @@
+---
+title: Software
+description: Installs preferred software 
+privilege: TrustedInstaller
+actions:
+
+  # Firefox
+  - !status: {status: 'Installing Firefox', option: "browser-firefox"}
+  - !software:
+    name: "Firefox"
+    source: chocolatey
+    option: "browser-firefox"
+    package: 'firefox'
+    weight: 150
+
+  # Chrome
+  - !status: {status: 'Installing Google Chrome', option: "browser-chrome"}
+  - !download:
+    option: "browser-chrome"
+    url: 'https://dl.google.com/dl/chrome/install/googlechromestandaloneenterprise64.msi'
+    destination: "ChromeSetup.msi"
+    package: 'chrome'
+  - !run:
+    exeDir: true
+    exe: "msiexec.exe"
+    args: "/i ChromeSetup.msi /quiet /norestart"
+    weight: 150
+    option: "browser-chrome"
+
+  # 7-Zip
+  - !status: {status: 'Installing 7-Zip', option: "archiver-7zip"}
+  - !download:
+    option: "archiver-7zip"
+    url: 'https://7-zip.org/a/7z2408-x64.exe'
+    destination: "7z-setup.exe"
+    package: '7zip'
+  - !run:
+    exeDir: true
+    exe: "7z-setup.exe"
+    args: "/S"
+    weight: 150
+    option: "archiver-7zip"
+
+  # PeaZip
+  - !status: {status: 'Installing PeaZip', option: "archiver-peazip"}
+  - !download:
+    option: "archiver-peazip"
+    url: 'https://github.com/peazip/PeaZip/releases/download/9.8.0/peazip-9.8.0.WIN64.exe'
+    destination: "peazip-setup.exe"
+    package: 'peazip'
+    errorAction: Ignore
+  - !run:
+    exeDir: true
+    exe: "peazip-setup.exe"
+    args: "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
+    weight: 150
+    option: "archiver-peazip"
+    errorAction: Ignore
+
+  # VLC
+  - !status: {status: 'Installing VLC Media Player', option: "mediaplayer-vlc"}
+  - !software:
+    name: "vlc"
+    source: chocolatey
+    option: "mediaplayer-vlc"
+    package: 'vlc'
+    weight: 150
+
+  # MPC-HC
+  - !status: {status: 'Installing MPC-HC', option: "mediaplayer-mpc"}
+  - !download:
+    option: "mediaplayer-mpc"
+    url: 'https://github.com/clsid2/mpc-hc/releases/download/1.7.19/MPC-HC.1.7.19.x64.exe'
+    destination: "mpc-hc-setup.exe"
+    package: 'mpc-hc'
+    errorAction: Ignore
+  - !run:
+    exeDir: true
+    exe: "mpc-hc-setup.exe"
+    args: "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
+    weight: 150
+    option: "mediaplayer-mpc"
+    errorAction: Ignore
+
+  # PotPlayer
+  - !status: {status: 'Installing PotPlayer', option: "mediaplayer-potplayer"}
+  - !download:
+    option: "mediaplayer-potplayer"
+    url: 'https://potplayer.daum.net/download/file/PotPlayerSetup64.exe'
+    destination: "potplayer-setup.exe"
+    package: 'potplayer'
+  - !run:
+    exeDir: true
+    exe: "potplayer-setup.exe"
+    args: "/S"
+    weight: 150
+    option: "mediaplayer-potplayer"
+
+  # Explorer Patcher
+  - !status: {status: 'Installing Explorer Patcher', option: "explorerpatcher"}
+  - !download:
+    option: "explorerpatcher"
+    url: 'https://github.com/valinet/ExplorerPatcher/releases/latest/download/ep_setup.exe'
+    destination: "explorerpatcher-setup.exe"
+    package: 'explorerpatcher'
+  - !run:
+    exeDir: true
+    exe: "explorerpatcher-setup.exe"
+    args: "/quiet /norestart"
+    weight: 150
+    option: "explorerpatcher"
+
+  # StartAllBack
+  - !status: {status: 'Installing StartAllBack', option: "startallback"}
+  - !download:
+    option: "startallback"
+    url: 'https://startisback.s3.amazonaws.com/startallback_setup.exe'
+    destination: "startallback-setup.exe"
+    package: 'startallback'
+    errorAction: Ignore
+  - !run:
+    exeDir: true
+    exe: "startallback-setup.exe"
+    args: "/silent /norestart"
+    weight: 150
+    option: "startallback"
+    errorAction: Ignore

@@ -1,0 +1,7 @@
+---
+title: Shuragen4ik-static-edition
+description: Shuragen4ik-static-edition
+privilege: TrustedInstaller
+actions:
+
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion', value: 'EditionSubManufacturer', type: REG_SZ, data: 'Shuragen4ik'}

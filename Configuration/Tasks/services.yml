@@ -1,0 +1,110 @@
+---
+title: Services
+description: Removal and configuration of services
+privilege: TrustedInstaller
+actions:
+  
+  - !writeStatus: {status: "Configuring services"}
+
+  # === Beep - Disabled
+  # - !service: {name: 'Beep', operation: change, startup: 4}
+
+  # === GraphicsPerfSvc - Disabled
+  # - !service: {name: 'GraphicsPerfSvc', operation: change, startup: 4}
+
+  # === Desktop Activity Moderator Driver - Disabled
+  - !service: {name: 'dam', operation: change, startup: 4}
+
+  # === Background Activity Moderator Driver - Disabled
+  # - !service: {name: 'bam', operation: change, startup: 4}
+
+  # === GPU Energy Driver - Disabled
+  - !service: {name: 'GpuEnergyDrv', operation: change, startup: 4}
+
+  # === NetBT - Disabled
+  - !service: {name: 'NetBT', operation: change, startup: 4}
+
+  # === Intel(R) Telemetry Service - Disabled
+  - !service: {name: 'Telemetry', operation: change, startup: 4}
+
+
+  # === Windows Network Data Usage Monitoring Driver - Disabled
+  # - !service: {name: 'Ndu', operation: change, startup: 4}
+
+  # === Microsoft (R) Diagnostics Hub Standard Collector Service - Disabled
+  - !service: {name: 'diagnosticshub.standardcollector.service', operation: change, startup: 4}
+
+  # === Windows Error Reporting Service - Disabled
+  - !service: {name: 'WerSvc', operation: change, startup: 4}
+
+  # === Unified Telemetry Client - Disabled
+  - !service: {name: 'DiagTrack', operation: change, startup: 4}
+
+  # === Windows Insider Service - Disabled
+  - !service: {name: 'wisvc', operation: change, startup: 4}
+
+  # === Program Compatibility Assistant Service - Disabled
+  - !service: {name: 'PcaSvc', operation: change, startup: 4}
+
+  # === Diagnostic Policy Service - Disabled
+  # ------> Needed for Data usage and troubleshooting, but the Troubleshooter automatically activates the service itself when needed
+  - !service: {name: 'DPS', operation: change, startup: 4}
+
+  # === Diagnostic Service Host - Disabled
+  - !service: {name: 'WdiServiceHost', operation: change, startup: 4}
+
+  # === Diagnostic System Host - Disabled
+  - !service: {name: 'WdiSystemHost', operation: change, startup: 4}
+  
+  #===== Tcpipreg (experimental)
+  - !service: {name: 'tcpipreg', operation: change, startup: 4}
+
+  # === EdgeUpdate - Manual 
+  # ------> Disabling it breaks WebView installation via Visual Studio)
+  - !service: {name: 'edgeupdate', operation: change, startup: 3}
+
+  # == Windows Event Collector - Disabled
+  - !service: {name: 'Wecsvc', operation: change, startup: 4} 
+
+  # == UCPD velocity - Disabled
+  - !service: {name: 'UCPD', operation: change, startup: 4}
+  - !powerShell: {command: "Disable-ScheduledTask -TaskPath '\\Microsoft\\Windows\\AppxDeploymentClient' -TaskName 'UCPD velocity'"}
+
+  - !service: {name: 'condrv', operation: change, startup: 2}
+
+  # === Services from unattend.xml - Disabled (4)
+  - !service: {name: 'WSearch', operation: change, startup: 4}
+  - !service: {name: 'dmwappushservice', operation: change, startup: 4}
+  - !service: {name: 'wuauserv', operation: change, startup: 4}
+  - !service: {name: 'UsoSvc', operation: change, startup: 4}
+  - !service: {name: 'BITS', operation: change, startup: 4}
+  - !service: {name: 'DoSvc', operation: change, startup: 4}
+  - !service: {name: 'SysMain', operation: change, startup: 4}
+  - !service: {name: 'SysMain', operation: stop, errorAction: Ignore}
+  - !service: {name: 'MapsBroker', operation: change, startup: 4}
+  - !service: {name: 'Fax', operation: change, startup: 4}
+  - !service: {name: 'WpcMonSvc', operation: change, startup: 4}
+  - !service: {name: 'RemoteRegistry', operation: change, startup: 4}
+  - !service: {name: 'TabletInputService', operation: change, startup: 4}
+  - !service: {name: 'WbioSrvc', operation: change, startup: 4}
+
+  # === Windows Defender services - Disabled
+  - !service: {name: 'WinDefend', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'SecurityCenter', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'wscsvc', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'Sense', operation: change, startup: 4, errorAction: Ignore}
+  - !service: {name: 'WdNisSvc', operation: change, startup: 4, errorAction: Ignore}
+
+  # === Services from unattend.xml - Manual (3)
+  - !service: {name: 'XblAuthManager', operation: change, startup: 3}
+  - !service: {name: 'XblGameSave', operation: change, startup: 3}
+  - !service: {name: 'XboxNetApiSvc', operation: change, startup: 3}
+  - !service: {name: 'XboxGipSvc', operation: change, startup: 3}
+  - !service: {name: 'bthserv', operation: change, startup: 3}
+  - !service: {name: 'LanmanServer', operation: change, startup: 2}
+  - !service: {name: 'LanmanWorkstation', operation: change, startup: 2}
+  - !service: {name: 'FDResPub', operation: change, startup: 3}
+  - !service: {name: 'fdPHost', operation: change, startup: 3}
+  - !service: {name: 'Spooler', operation: change, startup: 2}
+  - !service: {name: 'StiSvc', operation: change, startup: 3}
+  - !service: {name: 'iphlpsvc', operation: change, startup: 3}

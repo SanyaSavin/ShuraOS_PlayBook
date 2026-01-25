@@ -1,0 +1,34 @@
+---
+title: configure-kernel
+description: configure-kernel
+privilege: TrustedInstaller
+actions:
+
+  - !powerShell:
+    command: |
+      if ((Get-CimInstance Win32_Processor).Manufacturer -eq 'GenuineIntel') {
+        [microsoft.win32.registry]::SetValue('HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Kernel', 'DisableTsx', 0, [Microsoft.Win32.RegistryValueKind]::DWord)
+      } else {
+        Remove-ItemProperty -Path 'HKLM:\SYSTEM\ControlSet001\Control\Session Manager\Kernel' -Name 'DisableTsx' -ErrorAction SilentlyContinue | Out-Null
+      }
+
+  # === NTFS settings from unattend.xml
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\FileSystem', value: 'NtfsDisableLastAccessUpdate', type: REG_DWORD, data: '2147483651'}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\FileSystem', value: 'NtfsDisable8dot3NameCreation', type: REG_DWORD, data: '1'}
+
+  # === Mitigations override - disable Spectre/Meltdown/Downfall (0x220000F)
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management', value: 'FeatureSettingsOverride', type: REG_DWORD, data: '35651599'}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management', value: 'FeatureSettingsOverrideMask', type: REG_DWORD, data: '35651599'}
+
+  # === Prefetcher settings from unattend.xml
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters', value: 'EnablePrefetcher', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters', value: 'EnableSuperfetch', type: REG_DWORD, data: '0'}
+
+  # === DWM Overlay settings from unattend.xml
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\DWM', value: 'OverlayTestMode', type: REG_DWORD, data: '5'}
+
+  # === Graphics Drivers DisableOverlays - enabled (0)
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers', value: 'DisableOverlays', type: REG_DWORD, data: '0'}
+
+  # === Page file only on C drive
+  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management', value: 'PagingFiles', type: REG_MULTI_SZ, data: 'C:\pagefile.sys 2048 4096'}
