@@ -12,10 +12,88 @@ actions:
   - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'StartButtonStyle', type: REG_DWORD, data: '1', option: "explorerpatcher"}
   - !registryValue: {path: 'HKU\.DEFAULT\Software\ExplorerPatcher', value: 'StartButtonStyle', type: REG_DWORD, data: '1', option: "explorerpatcher"}
 
-  # === Explorer Patcher - Windows 10 File Explorer
-  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'FileExplorerCommandBarStyle', type: REG_DWORD, data: '1', option: "explorerpatcher"}
-  - !registryValue: {path: 'HKU\.DEFAULT\Software\ExplorerPatcher', value: 'FileExplorerCommandBarStyle', type: REG_DWORD, data: '1', option: "explorerpatcher"}
 
   # === Explorer Patcher - Register as shell extension
   - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'RegisterAsShellExtension', type: REG_DWORD, data: '1', option: "explorerpatcher"}
   - !registryValue: {path: 'HKU\.DEFAULT\Software\ExplorerPatcher', value: 'RegisterAsShellExtension', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+
+  # === Explorer Patcher - Taskbar settings
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'OldTaskbar', type: REG_DWORD, data: '2', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'OrbStyle', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'OldTaskbarAl', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'MMOldTaskbarAl', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'TaskbarPosition', type: REG_DWORD, data: '3', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'MMTaskbarPosition', type: REG_DWORD, data: '3', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'AutoHideTaskbar', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'TaskbarGlomLevel', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'MMTaskbarGlomLevel', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'TaskbarSmallIcons', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+
+  # === Explorer Patcher - Menu settings
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'SkinMenus', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'CenterMenus', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'FlyoutMenus', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+
+  # === Explorer Patcher - System tray settings
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'TrayOverflowStyle', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'ReplaceNetwork', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+
+  # === Explorer Patcher - Search settings
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'DisableModernSearchBar', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'ShrinkExplorerAddressBar', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'HideExplorerSearchBar', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+
+  # === Explorer Patcher - Start menu settings
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'Start_MaximumFrequentApps', type: REG_DWORD, data: '6', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'StartDocked_DisableRecommendedSection', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+
+  # === Explorer Patcher - Other settings
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'IMEStyle', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'LegacyFileTransferDialog', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'UseClassicDriveGrouping', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'DisableImmersiveContextMenu', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'HideIconAndTitleInExplorer', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'MicaEffectOnTitlebar', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'DisableOfficeHotkeys', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'DisableWinFHotkey', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'DisableAeroSnapQuadrants', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'DoNotRedirectSystemToSettingsApp', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'DoNotRedirectProgramsAndFeaturesToSettingsApp', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'DoNotRedirectDateAndTimeToSettingsApp', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'DoNotRedirectNotificationIconsToSettingsApp', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'UpdatePolicy', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'UpdatePreferStaging', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'UpdateAllowDowngrades', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'UpdateUseLocal', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'UpdateURL', type: REG_SZ, data: '', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'UpdateURLStaging', type: REG_SZ, data: '', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'AllocConsole', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'Memcheck', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'TaskbarAutohideOnDoubleClick', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'ClassicThemeMitigations', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'NoPropertiesInContextMenu', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'EnableSymbolDownload', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'PinnedItemsActAsQuickLaunch', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'RemoveExtraGapAroundPinnedItems', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'XamlSounds', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'Language', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+
+  # === Additional Explorer Patcher settings for Windows 10 UI
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'ImportOK', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Search', value: 'SearchboxTaskbarMode', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'ShowTaskViewButton', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\TabletTip\1.7', value: 'TipbandDesiredVisibility', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'ShowSecondsInSystemClock', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'HideControlCenterButton', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarSD', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows NT\CurrentVersion\MTCUVC', value: 'EnableMtcUvc', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell', value: 'UseWin32TrayClockExperience', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell', value: 'UseWin32BatteryFlyout', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Control Panel\Settings\Network', value: 'ReplaceVan', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'FileExplorerCommandUI', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'Start_ShowClassicMode', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'TaskbarAl', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage', value: 'MonitorOverride', type: REG_DWORD, data: '1', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage', value: 'MakeAllAppsDefault', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer', value: 'AltTabSettings', type: REG_DWORD, data: '0', option: "explorerpatcher"}
+  - !registryValue: {path: 'HKCU\Software\ExplorerPatcher', value: 'PeopleBand', type: REG_DWORD, data: '0', option: "explorerpatcher"}
