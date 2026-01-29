@@ -43,14 +43,6 @@ actions:
       wait: true
       option: 'disable-defender'
   
-  # Option: remove-defender - Полностью удалить Защитник Windows
-  - !writeStatus: {status: 'Removing Windows Defender completely...', option: 'remove-defender'}
-  - !powerShell:
-      command: '-ExecutionPolicy Bypass -File "Remove-Defender.ps1"'
-      exeDir: true
-      wait: true
-      option: 'remove-defender'
-  
   # Option: keep-defender - Оставить Защитник Windows как есть (ничего не делаем)
   - !writeStatus: {status: 'Keeping Windows Defender as is...', option: 'keep-defender'}
   
