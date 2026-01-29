@@ -3,7 +3,7 @@ title: Configure Security
 description: Configure security settings
 privilege: TrustedInstaller
 actions:
-  
+   
   # === Hide the Account Protection page in Defender
   # ------> Everything it provides redirects to the Windows Settings anyway. Done for annoyance reduction.
   - !registryValue: {path: 'HKCU\Software\Microsoft\Windows Security Health\State', value: 'AccountProtection_MicrosoftAccount_Disconnected', type: REG_DWORD, data: '0'}
@@ -23,7 +23,7 @@ actions:
 
   # === Allow security intelligence updates when running on battery power - Disabled
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\Windows Defender\Signature Updates', value: 'DisableScheduledSignatureUpdateOnBattery', type: REG_DWORD, data: '1'}
-  
+   
 
   # ====================================
   # === Windows Defender SmartScreen ===
@@ -41,31 +41,209 @@ actions:
   # === Configure Windows Defender SmartScreen (Microsoft Edge) - Disabled
   - !registryValue: {path: 'HKLM\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter', value: 'EnabledV9', type: REG_DWORD, data: '0'}
 
-  
+   
   # ========================
   # === Windows Security ===
   # ========================
 
-  # === Hide Windows Security Systray - Disabled
+  # === Hide Windows Security Systray - DISABLED (we want it visible)
   # ------> https://www.tenforums.com/tutorials/11974-hide-show-windows-security-notification-area-icon-windows-10-a.html
+  # ------> Note: We keep systray visible so user can access Windows Security
   - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray', value: 'HideSystray', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run', value: 'SecurityHealth', operation: delete}
 
-  # === Comprehensive Windows Defender disabling
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender', value: 'DisableAntiSpyware', type: REG_DWORD, data: '1'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender', value: 'DisableRoutinelyTakingAction', type: REG_DWORD, data: '1'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender', value: 'ServiceKeepAlive', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection', value: 'DisableBehaviorMonitoring', type: REG_DWORD, data: '1'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection', value: 'DisableOnAccessProtection', type: REG_DWORD, data: '1'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection', value: 'DisableScanOnRealtimeEnable', type: REG_DWORD, data: '1'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting', value: 'DisableEnhancedNotifications', type: REG_DWORD, data: '1'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows Defender', value: 'DisableRoutinelyTakingAction', type: REG_DWORD, data: '1'}
-  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows Defender\UX Configuration', value: 'UILockdown', type: REG_DWORD, data: '1'}
+  # ============================================================================
+  # === CRITICAL: Remove restrictions that cause "Page unavailable" errors ===
+  # ============================================================================
+  # These policies prevent access to Windows Security pages
+  # We need to DELETE them to allow full UI access
+  
+  # Delete DisableNotifications to allow notifications
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications', value: 'DisableNotifications', operation: delete}
+  
+  # Delete all "Hide" policies that block UI pages
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection', value: 'HideVirusAndThreatProtection', operation: delete}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection', value: 'UILockdown', operation: delete}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection', value: 'HideAppBrowserProtection', operation: delete}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device security', value: 'HideDeviceSecurityPage', operation: delete}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device performance and health', value: 'HideDevicePerformanceHealth', operation: delete}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Family options', value: 'HideFamilyOptions', operation: delete}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Firewall and network protection', value: 'HideFirewallAndNetworkProtection', operation: delete}
 
-  # === Disable Windows Firewall profiles
-  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile', value: 'EnableFirewall', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile', value: 'EnableFirewall', type: REG_DWORD, data: '0'}
-  - !registryValue: {path: 'HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PublicProfile', value: 'EnableFirewall', type: REG_DWORD, data: '0'}
+  # ============================================================================
+  # === OPTION: keep-defender - Оставить Защитник Windows как есть ===
+  # ============================================================================
+  # При выборе этой опции ничего не делаем с Defender
+  # Просто убеждаемся, что UI доступен
+
+  - !writeStatus: {status: 'Keeping Windows Defender as is', option: 'keep-defender'}
+
+  # ============================================================================
+  # === OPTION: disable-defender - Отключить Защитник Windows ===
+  # ============================================================================
+  # Отключаем Defender через политики (безопасный метод)
+  # Приложение "Безопасность Windows" остаётся видимым
+
+  - !writeStatus: {status: 'Disabling Windows Defender (UI remains accessible)', option: 'disable-defender'}
+  
+  # Отключение через Group Policy (работает без TamperProtection bypass)
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender'
+      value: 'DisableAntiSpyware'
+      type: REG_DWORD
+      data: '1'
+      option: 'disable-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender'
+      value: 'DisableAntiVirus'
+      type: REG_DWORD
+      data: '1'
+      option: 'disable-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      value: 'DisableRealtimeMonitoring'
+      type: REG_DWORD
+      data: '1'
+      option: 'disable-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      value: 'DisableBehaviorMonitoring'
+      type: REG_DWORD
+      data: '1'
+      option: 'disable-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      value: 'DisableOnAccessProtection'
+      type: REG_DWORD
+      data: '1'
+      option: 'disable-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      value: 'DisableScanOnRealtimeEnable'
+      type: REG_DWORD
+      data: '1'
+      option: 'disable-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      value: 'DisableIOAVProtection'
+      type: REG_DWORD
+      data: '1'
+      option: 'disable-defender'
+
+  # Отключение Cloud Protection
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet'
+      value: 'SpynetReporting'
+      type: REG_DWORD
+      data: '0'
+      option: 'disable-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet'
+      value: 'SubmitSamplesConsent'
+      type: REG_DWORD
+      data: '2'
+      option: 'disable-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine'
+      value: 'MpEnablePus'
+      type: REG_DWORD
+      data: '0'
+      option: 'disable-defender'
+
+  # Отключение SmartScreen
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\System'
+      value: 'EnableSmartScreen'
+      type: REG_DWORD
+      data: '0'
+      option: 'disable-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer'
+      value: 'SmartScreenEnabled'
+      type: REG_SZ
+      data: 'Off'
+      option: 'disable-defender'
+
+  # ВАЖНО: Сохраняем видимость приложения "Безопасность Windows"
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray'
+      value: 'HideSystray'
+      type: REG_DWORD
+      data: '0'
+      option: 'disable-defender'
+
+  # ============================================================================
+  # === OPTION: remove-defender - Полностью удалить Защитник Windows ===
+  # ============================================================================
+  # Полное удаление Defender из системы
+
+  - !writeStatus: {status: 'Removing Windows Defender completely', option: 'remove-defender'}
+  
+  # Отключение через Group Policy
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender'
+      value: 'DisableAntiSpyware'
+      type: REG_DWORD
+      data: '1'
+      option: 'remove-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender'
+      value: 'DisableAntiVirus'
+      type: REG_DWORD
+      data: '1'
+      option: 'remove-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      value: 'DisableRealtimeMonitoring'
+      type: REG_DWORD
+      data: '1'
+      option: 'remove-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      value: 'DisableBehaviorMonitoring'
+      type: REG_DWORD
+      data: '1'
+      option: 'remove-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      value: 'DisableOnAccessProtection'
+      type: REG_DWORD
+      data: '1'
+      option: 'remove-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      value: 'DisableScanOnRealtimeEnable'
+      type: REG_DWORD
+      data: '1'
+      option: 'remove-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      value: 'DisableIOAVProtection'
+      type: REG_DWORD
+      data: '1'
+      option: 'remove-defender'
+
+  # Скрытие системного трея для remove-defender
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray'
+      value: 'HideSystray'
+      type: REG_DWORD
+      data: '1'
+      option: 'remove-defender'
+
+  # Отключение SmartScreen
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows\System'
+      value: 'EnableSmartScreen'
+      type: REG_DWORD
+      data: '0'
+      option: 'remove-defender'
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer'
+      value: 'SmartScreenEnabled'
+      type: REG_SZ
+      data: 'Off'
+      option: 'remove-defender'
 
   # === Block Edge uninstall from unattend.xml
   - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge', value: 'NoRemove', type: REG_DWORD, data: '1'}

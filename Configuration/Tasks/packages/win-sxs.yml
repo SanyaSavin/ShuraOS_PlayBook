@@ -9,33 +9,22 @@ actions:
   - !writeStatus: {status: "Removing system packages"}
   # Custom removal skipped
 
-  - !writeStatus: {status: 'Disabling Windows Defender', option: 'disable-defender'}
-  - !powerShell:
-    command: 'Set-MpPreference -DisableRealtimeMonitoring $true -DisableBehaviorMonitoring $true -DisableOnAccessProtection $true -DisableScanOnRealtimeEnable $true'
-    wait: true
-    option: 'disable-defender'
-  - !powerShell:
-    command: 'Stop-Service -Name WinDefend -Force -ErrorAction SilentlyContinue; Stop-Service -Name SecurityCenter -Force -ErrorAction SilentlyContinue; Stop-Service -Name wscsvc -Force -ErrorAction SilentlyContinue'
-    wait: true
-    option: 'disable-defender'
-  - !cmd:
-    command: 'DISM /Online /Disable-Feature /FeatureName:Windows-Defender-Features /Remove /NoRestart'
-    wait: true
-    option: 'disable-defender'
-  - !cmd:
-    command: 'DISM /Online /Disable-Feature /FeatureName:Windows-Defender /Remove /NoRestart'
-    wait: true
-    option: 'disable-defender'
-  - !cmd:
-    command: 'DISM /Online /Disable-Feature /FeatureName:Windows-Defender-GUI /Remove /NoRestart'
-    wait: true
-    option: 'disable-defender'
+  # ============================================================================
+  # === Windows Defender Options ===
+  # ============================================================================
+  # NOTE: All Defender-related operations are handled by CMD scripts
+  # (Disable-Defender.cmd and Remove-Defender.cmd) which are executed from main.yml
+  # Direct PowerShell/service operations fail due to Tamper Protection
+  # ============================================================================
 
-  - !writeStatus: {status: 'Enabling Windows Defender', option: 'enable-defender'}
-  - !powerShell:
-    command: 'Set-MpPreference -EnableControlledFolderAccess Enabled -EnableNetworkProtection Enabled -PUAProtection enable'
-    wait: true
-    option: 'enable-defender'
+  # === Option: disable-defender - Отключить Защитник Windows ===
+  - !writeStatus: {status: 'Windows Defender will be disabled via script...', option: 'disable-defender'}
+
+  # === Option: remove-defender - Полностью удалить Защитник Windows ===
+  - !writeStatus: {status: 'Windows Defender will be removed via script...', option: 'remove-defender'}
+
+  # === Option: keep-defender - Оставить Защитник Windows как есть ===
+  - !writeStatus: {status: 'Keeping Windows Defender as is...', option: 'keep-defender'}
 
   - !writeStatus: {status: "Removing AI components", option: 'remove-winsxs-ai'}
   # Custom removal skipped

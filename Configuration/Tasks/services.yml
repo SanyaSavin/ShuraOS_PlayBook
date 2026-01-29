@@ -3,7 +3,7 @@ title: Services
 description: Removal and configuration of services
 privilege: TrustedInstaller
 actions:
-  
+   
   - !writeStatus: {status: "Configuring services"}
 
   # === Beep - Disabled
@@ -55,7 +55,7 @@ actions:
 
   # === Diagnostic System Host - Disabled
   - !service: {name: 'WdiSystemHost', operation: change, startup: 4}
-  
+   
   #===== Tcpipreg (experimental)
   - !service: {name: 'tcpipreg', operation: change, startup: 4}
 
@@ -88,12 +88,14 @@ actions:
   - !service: {name: 'TabletInputService', operation: change, startup: 4}
   - !service: {name: 'WbioSrvc', operation: change, startup: 4}
 
-  # === Windows Defender services - Disabled
-  - !service: {name: 'WinDefend', operation: change, startup: 4, errorAction: Ignore}
-  - !service: {name: 'SecurityCenter', operation: change, startup: 4, errorAction: Ignore}
-  - !service: {name: 'wscsvc', operation: change, startup: 4, errorAction: Ignore}
-  - !service: {name: 'Sense', operation: change, startup: 4, errorAction: Ignore}
-  - !service: {name: 'WdNisSvc', operation: change, startup: 4, errorAction: Ignore}
+  # ============================================================================
+  # === Windows Defender Services ===
+  # ============================================================================
+  # NOTE: Windows Defender services (WinDefend, WdNisSvc, Sense, etc.) are protected
+  # by Tamper Protection and cannot be modified directly via !service actions.
+  # All Defender-related operations are handled by Disable-Defender.cmd and
+  # Remove-Defender.cmd scripts which use special methods to bypass protection.
+  # ============================================================================
 
   # === Services from unattend.xml - Manual (3)
   - !service: {name: 'XblAuthManager', operation: change, startup: 3}

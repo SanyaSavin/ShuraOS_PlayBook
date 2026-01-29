@@ -5,6 +5,8 @@ privilege: TrustedInstaller
 actions:
 
   # === Hide stripped components from Settings
+  # ------> NOTE: virus-and-threat-protection is NOT hidden
+  # ------> This ensures "Virus & threat protection" page opens properly
   - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer', value: 'SettingsPageVisibility', type: REG_SZ, data: 'hide:cortana;privacy-feedback;windowsinsider;home'}
 
   # === Hide Insider page from Settings --> Windows Updates
