@@ -247,3 +247,72 @@ actions:
 
   # === Block Edge uninstall from unattend.xml
   - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge', value: 'NoRemove', type: REG_DWORD, data: '1'}
+
+  # ============================================================================
+  # === Windows Firewall - Disabled (UI remains fully accessible) ===
+  # ============================================================================
+  # Firewall is OFF by default, UI opens normally without any restrictions
+  # User can manually change settings
+
+  # Delete Group Policy keys that block UI and show "controlled by admin" message
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile'
+      value: ''
+      operation: delete
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile'
+      value: ''
+      operation: delete
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile'
+      value: ''
+      operation: delete
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\FirewallPolicy'
+      value: ''
+      operation: delete
+
+  # Disable firewall directly via service parameters (does not block UI)
+  # Standard Profile (Private network)
+  - !registryValue:
+      path: 'HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile'
+      value: 'EnableFirewall'
+      type: REG_DWORD
+      data: '0'
+  - !registryValue:
+      path: 'HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile'
+      value: 'DisableNotifications'
+      type: REG_DWORD
+      data: '0'
+
+  # Public Profile
+  - !registryValue:
+      path: 'HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PublicProfile'
+      value: 'EnableFirewall'
+      type: REG_DWORD
+      data: '0'
+  - !registryValue:
+      path: 'HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PublicProfile'
+      value: 'DisableNotifications'
+      type: REG_DWORD
+      data: '0'
+
+  # Domain Profile
+  - !registryValue:
+      path: 'HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile'
+      value: 'EnableFirewall'
+      type: REG_DWORD
+      data: '0'
+  - !registryValue:
+      path: 'HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile'
+      value: 'DisableNotifications'
+      type: REG_DWORD
+      data: '0'
+
+  # Ensure firewall UI is accessible
+  - !registryValue:
+      path: 'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Firewall and network protection'
+      value: 'HideFirewallAndNetworkProtection'
+      type: REG_DWORD
+      data: '0'
+
