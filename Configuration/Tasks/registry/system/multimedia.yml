@@ -23,3 +23,6 @@ actions:
   # === Enable Flip Model for games in windowed mode by default
   - !registryValue: {path: 'HKCU\SOFTWARE\Microsoft\DirectX\UserGpuPreferences', value: 'DirectXUserGlobalSettings', type: REG_SZ, data: 'SwapEffectUpgradeEnable=1;'}
   - !registryValue: {path: 'HKU\.DEFAULT\SOFTWARE\Microsoft\DirectX\UserGpuPreferences', value: 'DirectXUserGlobalSettings', type: REG_SZ, data: 'SwapEffectUpgradeEnable=1;'}
+
+  # === Enable DirectPlay (Legacy Components) for older games
+  - !powerShell: {command: 'Enable-WindowsOptionalFeature -Online -FeatureName "DirectPlay" -All -NoRestart'}
