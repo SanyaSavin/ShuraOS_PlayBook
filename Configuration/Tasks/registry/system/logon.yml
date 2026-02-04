@@ -9,17 +9,17 @@ actions:
     
   # === Turn on Windows Startup sound - Enabled
   # Remove the key to allow Windows Startup sound
-  - !powerShell: {command: 'Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableStartupSound" -ErrorAction SilentlyContinue | Out-Null', privilege: TrustedInstaller}
+  - !powerShell: {command: 'Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableStartupSound" -ErrorAction SilentlyContinue | Out-Null'}
 
   # === Enable Windows Logon/Logoff sounds visibility in Sound settings
   - !registryValue: {path: 'HKCU\AppEvents\EventLabels\WindowsLogon', value: 'ExcludeFromCPL', type: REG_DWORD, data: '0'}
   - !registryValue: {path: 'HKCU\AppEvents\EventLabels\WindowsLogoff', value: 'ExcludeFromCPL', type: REG_DWORD, data: '0'}
 
   # === Remove DisableStartupSound key from BootAnimation (alternative path)
-  - !powerShell: {command: 'Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" -Name "DisableStartupSound" -ErrorAction SilentlyContinue | Out-Null', privilege: TrustedInstaller}
+  - !powerShell: {command: 'Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" -Name "DisableStartupSound" -ErrorAction SilentlyContinue | Out-Null'}
 
   # === Remove DisableLogonSound key
-  - !powerShell: {command: 'Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableLogonSound" -ErrorAction SilentlyContinue | Out-Null', privilege: TrustedInstaller}
+  - !powerShell: {command: 'Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableLogonSound" -ErrorAction SilentlyContinue | Out-Null'}
   
   # =============================
   # === Windows Logon Options ===
