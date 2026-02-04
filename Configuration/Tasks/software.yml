@@ -125,3 +125,17 @@ actions:
     weight: 150
     option: "startallback"
     errorAction: Ignore
+
+  # RDP (Remote Desktop)
+  - !status: {status: 'Installing RDP', option: "tools-rdp", default: true}
+  - !download:
+    option: "tools-rdp"
+    url: 'https://go.microsoft.com/fwlink/?linkid=2247659'
+    destination: "rdp-setup.exe"
+    package: 'rdp'
+  - !run:
+    exeDir: true
+    exe: "rdp-setup.exe"
+    args: "/quiet /norestart"
+    weight: 150
+    option: "tools-rdp"
