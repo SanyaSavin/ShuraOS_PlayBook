@@ -127,7 +127,7 @@ actions:
     errorAction: Ignore
 
   # RDP (Remote Desktop)
-  - !status: {status: 'Installing RDP', option: "tools-rdp", default: true}
+  - !status: {status: 'Installing RDP', option: "tools-rdp"}
   - !download:
     option: "tools-rdp"
     url: 'https://go.microsoft.com/fwlink/?linkid=2247659'
