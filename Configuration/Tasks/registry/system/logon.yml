@@ -8,7 +8,18 @@ actions:
   - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System', value: 'EnableFirstLogonAnimation', type: REG_DWORD, data: '0'}
     
   # === Turn on Windows Startup sound - Enabled
-  - !registryValue: {path: 'HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System', value: 'DisableStartupSound', type: REG_DWORD, data: '0'}
+  # Remove the key to allow Windows Startup sound
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'DisableStartupSound', type: REG_DWORD, action: 'delete'}
+
+  # === Enable Windows Logon/Logoff sounds visibility in Sound settings
+  - !registryValue: {path: 'HKCU\AppEvents\EventLabels\WindowsLogon', value: 'ExcludeFromCPL', type: REG_DWORD, data: '0'}
+  - !registryValue: {path: 'HKCU\AppEvents\EventLabels\WindowsLogoff', value: 'ExcludeFromCPL', type: REG_DWORD, data: '0'}
+
+  # === Remove DisableStartupSound key from BootAnimation (alternative path)
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation', value: 'DisableStartupSound', type: REG_DWORD, action: 'delete'}
+
+  # === Remove DisableLogonSound key
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System', value: 'DisableLogonSound', type: REG_DWORD, action: 'delete'}
   
   # =============================
   # === Windows Logon Options ===
