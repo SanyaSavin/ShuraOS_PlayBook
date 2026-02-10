@@ -9,6 +9,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/SanyaSavin/ShuraOS_PlayBook?style=flat-square)](https://github.com/SanyaSavin/ShuraOS_PlayBook/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/SanyaSavin/ShuraOS_PlayBook?style=flat-square)](https://github.com/SanyaSavin/ShuraOS_PlayBook/network)
 [![GitHub issues](https://img.shields.io/github/issues/SanyaSavin/ShuraOS_PlayBook?style=flat-square)](https://github.com/SanyaSavin/ShuraOS_PlayBook/issues)
+![Downloads](https://img.shields.io/github/downloads/SanyaSavin/ShuraOS_PlayBook/total?color=purple)
 
 </div>
 
