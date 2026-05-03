@@ -82,21 +82,37 @@ actions:
     option: "mediaplayer-mpc"
     errorAction: Ignore
 
-  # PotPlayer
-  - !status: {status: 'Installing PotPlayer', option: "mediaplayer-potplayer"}
-  - !download:
-    option: "mediaplayer-potplayer"
-    url: 'https://potplayer.daum.net/download/file/PotPlayerSetup64.exe'
-    destination: "potplayer-setup.exe"
-    package: 'potplayer'
-  - !run:
-    exeDir: true
-    exe: "potplayer-setup.exe"
-    args: "/S"
-    weight: 150
-    option: "mediaplayer-potplayer"
+   # PotPlayer
+   - !status: {status: 'Installing PotPlayer', option: "mediaplayer-potplayer"}
+   - !download:
+     option: "mediaplayer-potplayer"
+     url: 'https://potplayer.daum.net/download/file/PotPlayerSetup64.exe'
+     destination: "potplayer-setup.exe"
+     package: 'potplayer'
+   - !run:
+     exeDir: true
+     exe: "potplayer-setup.exe"
+     args: "/S"
+     weight: 150
+     option: "mediaplayer-potplayer"
+     errorAction: Ignore
 
-  # Explorer Patcher
+    # FlyPhotos
+    - !status: {status: 'Installing FlyPhotos', option: "photoviewer-flyphotos"}
+    - !download:
+      option: "photoviewer-flyphotos"
+      url: 'https://github.com/riyasy/FlyPhotos/releases/latest/download/FlyPhotos.Setup.exe'
+      destination: "flyphotos-setup.exe"
+      package: 'flyphotos'
+    - !run:
+      exeDir: true
+      exe: "flyphotos-setup.exe"
+      args: "/S"
+      weight: 150
+      option: "photoviewer-flyphotos"
+      errorAction: Ignore
+
+   # Explorer Patcher
   - !status: {status: 'Installing Explorer Patcher', option: "explorerpatcher"}
   - !download:
     option: "explorerpatcher"
