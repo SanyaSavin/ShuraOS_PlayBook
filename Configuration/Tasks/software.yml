@@ -97,20 +97,20 @@ actions:
      option: "mediaplayer-potplayer"
      errorAction: Ignore
 
-    # FlyPhotos
-    - !status: {status: 'Installing FlyPhotos', option: "photoviewer-flyphotos"}
-    - !download:
-      option: "photoviewer-flyphotos"
-      url: 'https://github.com/riyasy/FlyPhotos/releases/latest/download/FlyPhotos.Setup.exe'
-      destination: "flyphotos-setup.exe"
-      package: 'flyphotos'
-    - !run:
-      exeDir: true
-      exe: "flyphotos-setup.exe"
-      args: "/S"
-      weight: 150
-      option: "photoviewer-flyphotos"
-      errorAction: Ignore
+   # FlyPhotos
+   - !status: {status: 'Installing FlyPhotos', option: "photoviewer-flyphotos"}
+   - !download:
+     option: "photoviewer-flyphotos"
+     url: 'https://github.com/riyasy/FlyPhotos/releases/latest/download/FlyPhotos.Setup.exe'
+     destination: "flyphotos-setup.exe"
+     package: 'flyphotos'
+   - !run:
+     exeDir: true
+     exe: "flyphotos-setup.exe"
+     args: "/S"
+     weight: 150
+     option: "photoviewer-flyphotos"
+     errorAction: Ignore
 
    # Explorer Patcher
   - !status: {status: 'Installing Explorer Patcher', option: "explorerpatcher"}
